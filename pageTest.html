@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Тестирование</title>
+    <style>
+        textarea {
+            width: 550px;
+            height: 300px;
+        }
+
+        p {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        button {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Тестирование</h1>
+
+<p>Массив тестов</p>
+
+<textarea id = "t1">
+[
+    {
+        "inputArray": [8, 5],
+        "outputArray": [13, 3]
+    },
+    {
+        "inputArray": [20, 30],
+        "outputArray": [50, -10]
+    },
+    {
+        "inputArray": [2, 2],
+        "outputArray": [4, 0]
+    }
+]
+</textarea>
+
+<br>
+
+<p>Содержимое файла</p>
+
+<textarea id = "t2">
+Сюда надо скопировать содержимое файла проекта
+</textarea>
+
+<br>
+<br>
+
+<button onclick = "sendQueryToServer();">Отправить</button>
+
+<script>
+    function sendQueryToServer() {
+        const testsArray = JSON.parse(document.getElementById("t1").value + "");
+        const fileContent = document.getElementById("t2").value + "";
+        const postBodyObject = {
+            testsArray: testsArray,
+            fileContent: fileContent,
+        };
+        const url = "http://localhost:5000/api/work";
+        const body = JSON.stringify(postBodyObject);
+        let r = new XMLHttpRequest();
+        r.open("POST", url, true);
+        r.send(body);
+        r.onreadystatechange = function() {
+            if(r.readyState === 4) {
+                if(r.status === 200) {
+                    alert(r.responseText);
+                    r = null;
+                } else {
+                    alert("Ошибка: " + r.status);
+                    r = null;
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

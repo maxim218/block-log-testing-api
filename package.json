@@ -1,0 +1,15 @@
+{
+  "name": "block-log-testing-api",
+  "version": "1.0.0",
+  "description": "block log testing api",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Main42 Team",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
